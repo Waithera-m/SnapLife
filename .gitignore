@@ -1,0 +1,7 @@
+# environment variables and environment
+.env
+virtual
+.vscode
+
+# generate byte files
+__pycache__/
