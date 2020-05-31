@@ -38,4 +38,43 @@ class Profile(models.Model):
         method deletes saved profile
         """
         self.delete()
-        
+
+class Image(models.Model):
+    """
+    class facilitates the creation of image objects
+    """
+    image = models.ImageField(upload_to='images/')
+    image_name = models.CharField(max_length=30)
+    image_caption = models.CharField(max_length=70)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    likes = models.IntegerField(default=0)
+    comments = models.TextField(max_length=100)
+
+    def __str__(self):
+        """
+        function returns informal representations of the models' objects
+        """
+        return self.image_name 
+
+    def save_image(self):
+        """
+        method saves added image object
+        """
+        self.save()
+
+    def update_image(self, using=None, fields=None, **kwargs):
+        """
+        method updates saved profile
+        """
+        if fields is not None:
+            fields = set(fields)
+            deferred_fields = self.get_deferred_fields()
+            if fields.intersection(deferred_fields):
+                fields = fields.union(deferred_fields)
+        super().refresh_from_db(using, fields, **kwargs)
+
+    def delete_image(self):
+        """
+        method deletes saved image object
+        """
+        self.delete()
