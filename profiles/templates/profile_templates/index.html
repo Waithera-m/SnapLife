@@ -1,8 +1,21 @@
 {% extends  'profile_templates/base.html' %}
+{% load bootstrap4 %}
+{% load static %}
 
 {% block content %}
     {{block.super}}
     <div class='container'>
-        <h1>Can we see this</h1>
+        <div class="row">
+            <div class="col-md-2">
+                <h1 class="text-center">he</h1>
+            </div>
+            <div class="col-md-4">
+                <img class="img-responsive" src="images/tablet.jpg" alt="tablets and phones">
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-2">
+                <h1>she</h1>
+            </div>
+        </div>
     </div>
 {% endblock %}
