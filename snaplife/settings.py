@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'profiles.apps.ProfilesConfig',
     'bootstrap4',
+    'django_registration',
 ]
 
 MIDDLEWARE = [
