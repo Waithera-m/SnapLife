@@ -10,6 +10,7 @@ class Profile(models.Model):
     bio = models.CharField(max_length=70)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(upload_to='profiles/')
+    followers = models.ManyToManyField(User, related_name='followers')
 
     def save_profile(self):
         """
@@ -52,7 +53,6 @@ class Image(models.Model):
     image_caption = models.CharField(max_length=70)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
-    comments = models.TextField(max_length=100)
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
 
     def save_image(self):
@@ -77,3 +77,33 @@ class Image(models.Model):
         method deletes saved image object
         """
         self.delete()
+
+class Comments(models.Model):
+    """
+    class facilitates the creation of commet objects
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    comment = models.CharField(max_length=100)
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    def save_comment(self):
+        """
+        method saves added comment
+        """
+        self.save()
+    
+    def delete_comment(self):
+        """
+        method deletes saved comment
+        """
+        self.delete()
+    
+    @classmethod
+    def get_comments(cls,id):
+        """
+        method gets comments associated with a given image
+        """
+        comments =  Comments.objects.filter(image__pk=id)
+        return comments
+

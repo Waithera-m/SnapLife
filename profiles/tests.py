@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Profile, Image
+from .models import Profile, Image, Comments
 from django.contrib.auth.models import User
 
 # Create your tests here.
@@ -102,3 +102,50 @@ class ImageModelTests(TestCase):
         self.image.delete_image()
         images = Image.objects.all()
         self.assertTrue(len(images) == 0)
+
+class CommentsModelTests(TestCase):
+    """
+    class facilitates the creation of tests to test comments' model behavior
+    """
+    def setUp(self):
+        """
+        method defines the instructions to be executed before each test
+        """
+        self.new_user = User(username="peaches", email="njihiamary11@gmail.com", password="somepassword")
+        self.new_user.save()
+        self.new_profile = Profile(bio="something something scifi", user=self.new_user, profile_pic="tablet.jpg")
+        self.new_profile.save()
+        self.image = Image(image='tablet.jpg', image_name='tablet', image_caption='random tablet', profile=self.new_profile, likes=0, comments='random comment')
+        self.image.save()
+        self.new_comment=Comments(user=self.new_user, image=self.image, comment='some comment')
+    
+    def test_instance(self):
+        """
+        method checks if an object is initialized properly
+        """
+        self.assertTrue(isinstance(self.new_comment, Comments))
+    
+    def test_save_comment(self):
+        """
+        method checks if added comment is saved to the database
+        """
+        self.new_comment.save_comment()
+        comments = Comments.objects.all()
+        self.assertTrue(len(comments) > 0)
+    
+    def test_delete_comment(self):
+        """
+        method checks if savd comment can be deleted
+        """
+        self.new_comment.save_comment()
+        self.new_comment.delete_comment()
+        comments = Comments.objects.all()
+        self.assertTrue(len(comments) == 0)
+    
+    def test_get_comments(self):
+        """
+        method checks if it is possible to get all saved comments
+        """
+        self.new_comment.save_comment()
+        comments = Comments.get_comments(self.image.id)
+        self.assertTrue(len(comments) == 1)
