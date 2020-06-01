@@ -48,7 +48,7 @@ class Profile(models.Model):
         """
         class method facilitates the retrieveal and return of profile objects with the ginven search term
         """
-        profile = Profile.objects.filter(user__username=name)
+        profile = Profile.objects.filter(user__username__icontains=name)
         return profile
 
     

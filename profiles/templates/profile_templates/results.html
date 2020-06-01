@@ -1,0 +1,27 @@
+{%extends 'profile_templates/base.html'%}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="text-center">Search Results</h1>
+</div>
+<div class="container">
+
+  <div class="row">
+    {% if profiles %}
+      <h2 style="margin-left: 250px;">Found {{ profiles|length }} result of searched term {{message}}</h2>
+    {% else %}
+      <h2 style="margin-left: 250px;"> Found 0 profiles for the search term {{message}}</h2>
+    {% endif %}
+  </div>
+  <div class="row">
+    {% for profile in profiles %}
+        <div class="card mb-3" style="width: 30rem;">
+            <img src="{{profile.profile_pic.url}}" alt="" class="card-img-top">
+            <div class="card-body">
+                <div class="card-title">{{profile.user.username}}</div>
+            </div>
+        </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

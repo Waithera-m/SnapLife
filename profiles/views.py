@@ -67,3 +67,17 @@ def upload_image(request):
             else:
                 form = ImageForm()
     return render(request, 'profile_templates/upload_image.html', {'form':form})
+
+def search_by_username(request):
+    """
+    view function renders template that shows results associated with a given search term
+    """
+    if 'profile' in request.GET and request.GET['profile']:
+        name = request.GET.get("profile")
+        profiles = Profile.get_by_name(name)
+        message = f'{name}'
+        return render(request, 'profile_templates/results.html', {"message":message, "profiles":profiles})
+    
+    else:
+        message = "please enter a search term"
+        return render(request, 'profile_templates/results.html', {"message":message})
