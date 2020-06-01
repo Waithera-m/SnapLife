@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Profile, Image
-from .forms import ProfileForm
+from .models import Profile, Image, Comments
+from .forms import ProfileForm, ImageForm
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
@@ -47,3 +47,23 @@ def user_profile(request, profile_id):
         raise Http404()
         raise False
     return render(request, 'profile_templates/profile.html', {'profile':profile})
+
+@login_required(login_url='/accounts/login/')
+def upload_image(request):
+    """
+    view functon displays the upload image form
+    """
+    profiles = Profile.objects.all()
+    current_user = request.user.profile
+    for profile in profiles:
+        if profile.user.id == request.user.id:
+            if request.method == 'POST':
+                form = ImageForm(request.POST, request.FILES)
+                if form.is_valid():
+                    image = form.save(commit=False)
+                    image.profile = current_user
+                    image.save()
+                return redirect('profiles:user_profile', id=profile.id)
+            else:
+                form = ImageForm()
+    return render(request, 'profile_templates/upload_image.html', {'form':form})

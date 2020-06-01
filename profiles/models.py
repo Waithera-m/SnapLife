@@ -42,6 +42,7 @@ class Profile(models.Model):
         """
         profile = Profile.objects.get(pk=id)
         return profile
+
     
 
 class Image(models.Model):
@@ -80,7 +81,7 @@ class Image(models.Model):
 
 class Comments(models.Model):
     """
-    class facilitates the creation of commet objects
+    class facilitates the creation of comment objects
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
