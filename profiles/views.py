@@ -63,10 +63,10 @@ def upload_image(request):
                     image = form.save(commit=False)
                     image.profile = current_user
                     image.save()
-                return redirect('profiles:user_profile', id=profile.id)
+                return redirect('profiles:user_profile', profile_id=profile.id)
             else:
                 form = ImageForm()
-    return render(request, 'profile_templates/upload_image.html', {'form':form})
+    return render(request, 'profile_templates/upload_image.html', {'form':form, 'profiles':profiles})
 
 def search_by_username(request):
     """
@@ -81,3 +81,12 @@ def search_by_username(request):
     else:
         message = "please enter a search term"
         return render(request, 'profile_templates/results.html', {"message":message})
+
+def all_images(request, profile_id):
+    """
+    function gets and displays all images uploaded by a user
+    """
+    current_user = request.user.profile
+    user = current_user
+    images = Image.objects.filter(profile_id=profile_id)
+    return render(request, 'profile_templates/user_posts.html', {'images':images})

@@ -110,7 +110,7 @@ class ImageModelTests(TestCase):
         self.image.delete_image()
         images = Image.objects.all()
         self.assertTrue(len(images) == 0)
-
+        
 class CommentsModelTests(TestCase):
     """
     class facilitates the creation of tests to test comments' model behavior

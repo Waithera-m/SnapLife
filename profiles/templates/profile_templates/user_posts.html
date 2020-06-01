@@ -1,0 +1,34 @@
+{% extends 'profile_templates/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">Your Posts</h1>
+        <section id="gallery">
+            {% for image in images %}
+                <a data-toggle="modal" data-target="#imageModal{{forloop.counter}}">
+                    <img src="{{image.image.url}}">
+                </a>
+                <div class="modal fade" id="imageModal{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="moiModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="moiModelLabel">{{image.image_name}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img itemprop="image" src='{{image.image.url}}' style="width: 100%; height: 100%;">
+                                <p></p>
+                                <p>Publication Date: {{image.pub_date}}</p>
+                                <p>{{image.image_caption}}</p>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+    </div>
+{% endblock %}
