@@ -47,6 +47,14 @@ class  ProfileModelTests(TestCase):
         self.new_profile.delete_profile()
         profiles = Profile.objects.all()
         self.assertTrue(len(profiles) == 0)
+    
+    def test_get_profile_by_id(self):
+        """
+        method checks if it is possible to get a profile using the profile's id
+        """
+        self.new_profile.save_profile()
+        found_profile = Profile.get_profile_by_id(id=self.new_profile.id)
+        self.assertEqual(found_profile, self.new_profile)
 
 class ImageModelTests(TestCase):
     """

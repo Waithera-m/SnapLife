@@ -12,7 +12,6 @@ def index(request):
     """
     view function renders the landing page
     """
-    
     return render(request, 'profile_templates/index.html')
 
 @login_required(login_url='/accounts/login/')

@@ -8,7 +8,7 @@ class Profile(models.Model):
     class facilitates the creation of profile objects
     """
     bio = models.CharField(max_length=70)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(upload_to='profiles/')
 
     def save_profile(self):
@@ -33,6 +33,15 @@ class Profile(models.Model):
         method deletes saved profile
         """
         self.delete()
+    
+    @classmethod
+    def get_profile_by_id(cls, id):
+        """
+        methods gets and returns a profile with a given id
+        """
+        profile = Profile.objects.get(pk=id)
+        return profile
+    
 
 class Image(models.Model):
     """
