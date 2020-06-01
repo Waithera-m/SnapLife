@@ -7,7 +7,7 @@ app_name = 'profiles'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('new/profile/', views.new_profile, name='new_profile'),
+    path('new_profile/', views.new_profile, name='new_profile'),
     path('user_profile/<int:profile_id>', views.user_profile, name='user_profile'),
 ]
 if settings.DEBUG:

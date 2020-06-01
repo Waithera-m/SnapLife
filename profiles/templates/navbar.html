@@ -5,18 +5,11 @@
         <meta name="viewport" content="width=device-width", initial-scale=1>
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark bg-black fixed-bottom">
+        <nav class="navbar navbar-expand-md navbar-dark bg-black fixed-top">
             <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{% url 'profiles:index' %}">SnapLife</a>
-                </div>
+                <a class="navbar-brand" href="{% url 'profiles:index' %}">SnapLife</a>
                 <div class="navbar-collapse collapse">
+                    <a href="{% url 'profiles:new_profile' %}" style="margin-right: 10px;">Create Profile</a>
                     <a href="{% url 'logout'%}">Logout</a>
                 </div>
             </div>
