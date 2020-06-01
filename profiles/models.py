@@ -10,7 +10,7 @@ class Profile(models.Model):
     bio = models.CharField(max_length=70)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(upload_to='profiles/')
-    followers = models.ManyToManyField(User, related_name='followers')
+    followers = models.ManyToManyField(User, related_name='followers', symmetrical=False)
 
     def save_profile(self):
         """
@@ -41,6 +41,14 @@ class Profile(models.Model):
         methods gets and returns a profile with a given id
         """
         profile = Profile.objects.get(pk=id)
+        return profile
+    
+    @classmethod
+    def get_by_name(cls, name):
+        """
+        class method facilitates the retrieveal and return of profile objects with the ginven search term
+        """
+        profile = Profile.objects.filter(user__username=name)
         return profile
 
     
@@ -78,7 +86,7 @@ class Image(models.Model):
         method deletes saved image object
         """
         self.delete()
-
+    
 class Comments(models.Model):
     """
     class facilitates the creation of comment objects

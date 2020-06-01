@@ -55,6 +55,14 @@ class  ProfileModelTests(TestCase):
         self.new_profile.save_profile()
         found_profile = Profile.get_profile_by_id(id=self.new_profile.id)
         self.assertEqual(found_profile, self.new_profile)
+    
+    def test_get_by_name(self):
+        """
+        method tests model's earch functionality
+        """
+        self.new_profile.save_profile()
+        found_profile = Profile.get_by_name('peaches')
+        self.assertTrue(len(found_profile) == 1)
 
 class ImageModelTests(TestCase):
     """
