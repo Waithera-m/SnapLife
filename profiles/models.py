@@ -10,11 +10,6 @@ class Profile(models.Model):
     bio = models.CharField(max_length=70)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(upload_to='profiles/')
-    def __str__(self):
-        """
-        function returns informal representations of the models' objects
-        """
-        return self.user
 
     def save_profile(self):
         """
@@ -49,12 +44,7 @@ class Image(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
     comments = models.TextField(max_length=100)
-
-    def __str__(self):
-        """
-        function returns informal representations of the models' objects
-        """
-        return self.image_name 
+    pub_date = models.DateTimeField(auto_now_add=True, null=True)
 
     def save_image(self):
         """
