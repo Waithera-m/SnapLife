@@ -2,8 +2,8 @@
 {% load static %}
 {% block content %}
     {{block.super}}
-    <div class="container">
-        <div class="row">
+    <div class="container" style="margin-top: 30px;">
+        <div class="row" style="margin-bottom: 20px;">
             <div class="col-md-4">
                 <i class="fa fa-desktop"></i>
             </div>
@@ -13,15 +13,38 @@
             <div class="col-md-4"></div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <img src="{{profile.profile_pic.url}}" class="rounded-circle" alt="profile image" height="315" width="350">
+            <div class="col-md-5">
+                <img src="{{profile.profile_pic.url}}" class="rounded" alt="profile image" height="315" width="420">
                 <p>{{profile.user.first_name}}</p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <h4>{{profile.user.username}}</h4>
                 <p>{{profile.bio}}</p>
-                <a href="{% url 'profiles:new_profile' user.id %}" class="btn btn-outline-dark">Edit Profile</a>
+                <a href="{% url 'profiles:new_profile' %}" class="btn btn-outline-dark">Edit Profile</a>
             </div>
+            <div class="col-md-2"></div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Posts:</p>
+            </div>
+            <div class="col-md-4">
+                <p>Followers:0</p>
+            </div>
+            <div class="col-md-4">
+                <p>Following:</p>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <i class="fas fa-camera" style="font-size:120px;color:#2196F3"></i>
+                <p>Share Photos</p>
+                <p>Your shared photos will be appear on your profile</p>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="'col-md-2"></div>
         </div>
     </div>
 {% endblock %}

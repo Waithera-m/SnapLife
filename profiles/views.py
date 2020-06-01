@@ -13,7 +13,8 @@ def index(request):
     """
     view function renders the landing page
     """
-    return render(request, 'profile_templates/index.html')
+    profiles = Profile.objects.all()
+    return render(request, 'profile_templates/index.html', {'profiles':profiles})
 
 
 
@@ -29,7 +30,7 @@ def new_profile(request):
             profile = form.save(commit=False)
             profile.user = current_user
             profile.save()
-        return redirect('profiles:user_profile')
+        return redirect('profiles:index')
     else:
         form = ProfileForm()
     return render(request, 'profile_templates/new_profile.html', {"form":form})
@@ -41,6 +42,8 @@ def user_profile(request, profile_id):
     """
     try:
         profile = Profile.get_profile_by_id(id=profile_id)
+        print(profile)
     except ObjectDoesNotExist:
         raise Http404()
+        raise False
     return render(request, 'profile_templates/profile.html', {'profile':profile})
