@@ -14,6 +14,7 @@ urlpatterns = [
     path('posts/user_profile/<int:profile_id>', views.all_images, name='posts'),
     path('comments/<int:image_id>', views.comment, name='comments'),
     path('like/<int:image_id>', views.like_image, name='like'),
+    path('follow/<username>', views.following, name='following'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

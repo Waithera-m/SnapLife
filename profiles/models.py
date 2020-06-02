@@ -10,7 +10,7 @@ class Profile(models.Model):
     bio = models.CharField(max_length=70)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_pic = models.ImageField(upload_to='profiles/')
-    followers = models.ManyToManyField(User, related_name='followers', symmetrical=False)
+    following = models.ManyToManyField(User, related_name='following', symmetrical=False)
 
     def save_profile(self):
         """

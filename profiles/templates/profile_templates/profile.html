@@ -2,12 +2,12 @@
 {% load static %}
 {% block content %}
     {{block.super}}
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-bottom">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-bottom" style="background-color: #0b132b;">
         <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'profiles:index' %}" style="padding-left: 100px;">SnapLife</a>
             <div class="navbar-collapse collapse">
                 <a href="{% url 'profiles:new_profile' %}" style="margin-right: 10px; color: white;">Edit Profile</a>
-                <a href="{% url 'logout'%}" style="margin-right: 10px; color: white;">Logout</a>
+                <a href="/accounts/logout" style="margin-right: 10px; color: white;">Logout</a>
             </div>
         </div>
     </nav>

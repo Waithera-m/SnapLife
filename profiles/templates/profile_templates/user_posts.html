@@ -1,35 +1,51 @@
 {% extends 'profile_templates/base.html' %}
 
 {% block content %}
-    <div class="container">
-        <h1 class="text-center">Your Posts</h1>
-        <section id="gallery">
-            {% for image in images %}
-                <a data-toggle="modal" data-target="#imageModal{{forloop.counter}}">
-                    <img src="{{image.image.url}}">
-                </a>
-                <div class="modal fade" id="imageModal{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="moiModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-md" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="moiModelLabel">{{image.image_name}}</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <img itemprop="image" src='{{image.image.url}}' style="width: 100%; height: 100%;">
-                                <p></p>
-                                <p>Publication Date: {{image.pub_date}}</p>
-                                <p>{{image.image_caption}}</p>
-                            </div>
-                            <div class="modal-footer">
-                                <a href="{% url 'profiles:comments' image.id %}">Comment</a>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-bottom" style="background-color: #0b132b;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'profiles:index' %}" style="padding-left: 100px;">SnapLife</a>
+            <div class="navbar-collapse collapse">
+                <a href="{% url 'profiles:new_profile' %}" style="margin-right: 10px; color: white;">Edit Profile</a>
+                <a href="/accounts/logout" style="margin-right: 10px; color: white;">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="background-color: #1c2541;">
+        <h1 class="text-center" style="color: white;">Your Posts</h1>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <section id="gallery">
+                    {% for image in images %}
+                        <a data-toggle="modal" data-target="#imageModal{{forloop.counter}}">
+                            <img src="{{image.image.url}}">
+                        </a>
+                        <div class="modal fade" id="imageModal{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="moiModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-md" role="document">
+                                <div class="modal-content" style="background-color: #0b132b; color: white;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="moiModelLabel">{{image.image_name}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img itemprop="image" src='{{image.image.url}}' style="width: 100%; height: 100%;">
+                                        <p></p>
+                                        <p>Publication Date: {{image.pub_date}}</p>
+                                        <p>{{image.image_caption}}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{% url 'profiles:comments' image.id %}">Comment</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </section>
+                    {% endfor %}
+                </section>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        
     </div>
 {% endblock %}
