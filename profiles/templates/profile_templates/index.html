@@ -23,20 +23,9 @@
         <div class="container-fluid" style="margin-top: 59px; background-color: #1c2541;">
             
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12 col-lg-4">
+                <div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">
                     <hr>
-                    <h1 class="text-center" style="color: white;">Who To Follow</h1>
-                    {% for profile in profiles %}
-                        <div class="card mb-3">
-                            <img src="{{profile.profile_pic.url}}" alt="" class="card-img-top">
-                            <div class="card-body">
-                                <div class="card-title">{{profile.user.username}}</div>
-                                <div class="message-section" style="display:none;"></div>
-                                <a href="{% url 'profiles:user_profile' profile.id %}" style="margin-right: 10px;">View Profile</a>
-                                <button data-url="{% url 'profiles:following' profile.user.username %}" class="follow-button" type="button">Follow</button>
-                            </div>
-                        </div>
-                    {% endfor %}
+                    <h1 class="text-center" style="color: white;">Following</h1>
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-8 col-sm-8 col-xs-12 col-lg-6">
@@ -67,8 +56,8 @@
                                             {% endfor %}
                                         </div>
                                         <div class="modal-footer">
-                                            <a href="{% url 'profiles:like' image.id %}"><i class="fa fa-thumbs-up"></i></a>
-                                            <a href="{% url 'profiles:comments' image.id %}">Comment</a>
+                                            <a href="{% url 'profiles:like' image.id %}"><i class="fa fa-thumbs-up" style="color:white;"></i></a>
+                                            <a href="{% url 'profiles:comments' image.id %}" style="color:white;">Comment</a>
                                         </div>
                                     </div>
                                 </div>
@@ -76,6 +65,22 @@
                         {% endfor %}
                     </section>
                 </div>
+            </div>
+            <hr>
+            <h1 class="text-center" style="color: white;">Who To Follow</h1>
+            <hr>
+            <div class="row">
+                {% for profile in profiles %}
+                    <div class="card mb-3" style="width: 20rem; margin-left: 10px;">
+                        <img src="{{profile.profile_pic.url}}" alt="" class="card-img-top">
+                        <div class="card-body">
+                            <div class="card-title">{{profile.user.username}}</div>
+                            <div class="message-section" style="display:none;"></div>
+                            <a href="{% url 'profiles:user_profile' profile.id %}" style="margin-right: 10px;">View Profile</a>
+                            <button data-url="{% url 'profiles:following' profile.user.id %}" class="follow-button" type="button">Follow</button>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
             
         </div>

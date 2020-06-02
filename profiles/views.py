@@ -129,14 +129,14 @@ def like_image(request, image_id):
     return redirect('profiles:index')
 
 @login_required(login_url='accounts/login/')
-def following(request, username):
+def following(request, profile_id):
     """
     view function gets following list
     """
-    to_follow = get_object_or_404(Profile, following__user__username = username)
-    user_profile = request.user.profile
+    to_follow = get_object_or_404(Profile, user__profile__id=profile_id)
+    user_profile = request.user
     
-    if to_follow.following.filter(following__user__username=username).exists():
+    if to_follow.following.filter(id=user.id).exists():
         message = "You are already following this user"
     else:
         user_profile.following.add(to_follow)
