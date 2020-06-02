@@ -122,10 +122,9 @@ def like_image(request, image_id):
         image = get_object_or_404(Image, id=image_id)
 
         obj, created = Like.objects.get_or_create(image=image, user=request.user)
-        if not created:
-            messages.warning(request, "Already liked")
     except ObjectDoesNotExist:
-        messages.warning(request, 'Image does not exist')
+        raise Http404()
+        raise False
     
     return redirect('profiles:index')
 

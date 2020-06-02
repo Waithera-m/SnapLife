@@ -20,11 +20,12 @@
     </head>
     <body>
         {% include 'navbar.html' %}
-        <div class="container-fluid" style="margin-top: 100px;">
+        <div class="container-fluid" style="margin-top: 59px; background-color: #1c2541;">
             
             <div class="row">
                 <div class="col-md-3 col-sm-6 col-xs-12 col-lg-4">
-                    <h1 class="text-center">Who To Follow</h1>
+                    <hr>
+                    <h1 class="text-center" style="color: white;">Who To Follow</h1>
                     {% for profile in profiles %}
                         <div class="card mb-3">
                             <img src="{{profile.profile_pic.url}}" alt="" class="card-img-top">
@@ -37,26 +38,28 @@
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">
-                    <h1 class="text-center">Posts</h1>
+                    <hr>
+                    <h1 class="text-center" style="color: white;">Posts</h1>
                     <section id="gallery">
                         {% for image in images %}
                             <a data-toggle="modal" data-target="#imageModal{{forloop.counter}}">
                                 <img src="{{image.image.url}}">
                             </a>
                             <div class="modal fade" id="imageModal{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="moiModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-md" role="document">
-                                    <div class="modal-content">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content" style="background-color: #0b132b; color: white;">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="moiModelLabel">{{image.image_name}}</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
                                             <img itemprop="image" src='{{image.image.url}}' style="width: 100%; height: 100%;">
                                             <p></p>
-                                            <p>Publication Date: {{image.pub_date}}</p>
-                                            <p>{{image.image_caption}}</p>
+                                            <p>Added: {{image.pub_date|timesince}} ago by @{{image.profile.user}}</p>
+                                            <p>Caption: {{image.image_caption}}</p>
+                                            <p style="margin-top: 5px;"></p>
                                             {% for comment in comments %}
                                                 <p>@{{comment.user.username}} - {{comment.comment}} </p>
                                             {% endfor %}

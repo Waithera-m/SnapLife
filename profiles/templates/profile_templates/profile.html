@@ -58,13 +58,13 @@
             <div class="col-md-4">
                 <i class="fas fa-camera" style="font-size:120px;color:#2196F3"></i>
                 <p>Share Photos</p>
-                <p>Your shared photos will be appear on your profile</p>
+                <p>Your shared photos will be appear on your posts page and timeline</p>
             </div>
             <div class="col-md-4">
                 <a href="{% url 'profiles:upload' %}" class="btn btn-primary">Upload Image</a>
             </div>
-            <div class="'col-md-4">
-                
+            <div class="col-md-4">
+                <a href="{% url 'profiles:index' %}" class="btn btn-primary">View Timeline</a>
             </div>
         </div>
         <div class="row" style="margin-bottom: 50px;">

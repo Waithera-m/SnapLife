@@ -86,6 +86,9 @@ class Image(models.Model):
         """
         self.delete()
     
+    class Meta:
+        ordering = ['-pub_date']
+    
 class Comments(models.Model):
     """
     class facilitates the creation of comment objects
