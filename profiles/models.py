@@ -61,7 +61,6 @@ class Image(models.Model):
     image_name = models.CharField(max_length=30)
     image_caption = models.CharField(max_length=70)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    likes = models.IntegerField(default=0)
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
 
     def save_image(self):
@@ -115,4 +114,12 @@ class Comments(models.Model):
         """
         comments =  Comments.objects.filter(image__pk=id)
         return comments
+
+class Like(models.Model):
+    """
+    class facilitates the creation of like objects
+    """
+    image = models.ForeignKey(Image, related_name='liked_image', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='liker', on_delete=models.CASCADE)
+    date_liked = models.DateTimeField(auto_now_add=True)
 

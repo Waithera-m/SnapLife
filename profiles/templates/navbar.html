@@ -10,9 +10,8 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="{% url 'profiles:index' %}">SnapLife</a>
                 <div class="navbar-collapse collapse">
-                    <a href="{% url 'profiles:new_profile' %}" style="margin-right: 10px; color: white;">Create Profile {{profile.id}}</a>
-                    
-                    <a href="{% url 'logout'%}" style="margin-right: 10px; color: white;">Logout</a>
+                    <a href="{% url 'profiles:new_profile' %}" style="margin-right: 10px; color: white;">Edit Profile</a>
+                    <a href="/accounts/logout" style="margin-right: 10px; color: white;">Logout</a>
                 </div>
             </div>
             <div class="col-sm-4 col-md-3 navbar-right">

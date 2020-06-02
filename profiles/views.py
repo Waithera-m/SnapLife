@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Profile, Image, Comments
+from .models import Profile, Image, Comments, Like
 from .forms import ProfileForm, ImageForm, CommentsForm
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
+from django.views import generic
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -14,9 +15,9 @@ def index(request):
     view function renders the landing page
     """
     profiles = Profile.objects.all()
-    return render(request, 'profile_templates/index.html', {'profiles':profiles})
-
-
+    images = Image.objects.all()
+    comments = Comments.objects.all()
+    return render(request, 'profile_templates/index.html', {'profiles':profiles, 'images':images, 'comments':comments})
 
 @login_required(login_url='/accounts/login/')
 def new_profile(request):
@@ -98,7 +99,6 @@ def comment(request, image_id):
     """
     view function allows users to comment and like a post
     """
-    profile = Profile.objects.filter()
     image = get_object_or_404(Image, id=image_id)
     current_user = request.user
     if request.method == 'POST':
@@ -112,3 +112,22 @@ def comment(request, image_id):
     else:
         form = CommentsForm
     return render(request, 'profile_templates/new_comment.html', {"form":form, "image_id":image_id})
+
+@login_required(login_url='/accounts/login/')
+def like_image(request, image_id):
+    """
+    view function allows users to like images
+    """
+    try:
+        image = get_object_or_404(Image, id=image_id)
+
+        obj, created = Like.objects.get_or_create(image=image, user=request.user)
+        if not created:
+            messages.warning(request, "Already liked")
+    except ObjectDoesNotExist:
+        messages.warning(request, 'Image does not exist')
+    
+    return redirect('profiles:index')
+
+
+

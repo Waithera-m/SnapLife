@@ -13,6 +13,7 @@ urlpatterns = [
     path('search/', views.search_by_username, name='search_results'),
     path('posts/user_profile/<int:profile_id>', views.all_images, name='posts'),
     path('comments/<int:image_id>', views.comment, name='comments'),
+    path('like/<int:image_id>', views.like_image, name='like'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
