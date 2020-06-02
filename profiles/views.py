@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Profile, Image, Comments
-from .forms import ProfileForm, ImageForm
+from .forms import ProfileForm, ImageForm, CommentsForm
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
@@ -68,6 +68,7 @@ def upload_image(request):
                 form = ImageForm()
     return render(request, 'profile_templates/upload_image.html', {'form':form, 'profiles':profiles})
 
+@login_required(login_url='/accounts/login/')
 def search_by_username(request):
     """
     view function renders template that shows results associated with a given search term
@@ -82,6 +83,7 @@ def search_by_username(request):
         message = "please enter a search term"
         return render(request, 'profile_templates/results.html', {"message":message})
 
+@login_required(login_url='/accounts/login/')
 def all_images(request, profile_id):
     """
     function gets and displays all images uploaded by a user
@@ -90,3 +92,23 @@ def all_images(request, profile_id):
     user = current_user
     images = Image.objects.filter(profile_id=profile_id)
     return render(request, 'profile_templates/user_posts.html', {'images':images})
+
+@login_required(login_url='/accounts/login/')
+def comment(request, image_id):
+    """
+    view function allows users to comment and like a post
+    """
+    profile = Profile.objects.filter()
+    image = get_object_or_404(Image, id=image_id)
+    current_user = request.user
+    if request.method == 'POST':
+        form = CommentsForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = current_user
+            comment.image = image
+            comment.save()
+        return redirect('profiles:index')
+    else:
+        form = CommentsForm
+    return render(request, 'profile_templates/new_comment.html', {"form":form, "image_id":image_id})
