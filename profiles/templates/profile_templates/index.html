@@ -26,6 +26,15 @@
                 <div class="col-md-4 col-sm-6 col-xs-12 col-lg-4">
                     <hr>
                     <h1 class="text-center" style="color: white;">Following</h1>
+                    {% for following in following %}
+                    <div class="card mb-3" style="width: 20rem;">
+                        <img src="{{following.user.profile.profile_pic.url}}" class="card-img-top">
+                        <div class="card-body">
+                            <h5>@{{following.user.username}}</h5>
+                        </div>
+                    </div>
+                    
+                    {% endfor %}
                 </div>
                 <div class="col-md-1"></div>
                 <div class="col-md-8 col-sm-8 col-xs-12 col-lg-6">
@@ -93,8 +102,6 @@
             $('.follow-button').click(function(){
                 var profile_id = $(this).attr('data_id')
                 $.get($(this).data('url'), function(response){
-                    console.log(response)
-                    console.log(profile_id)
                     $('#message-'+profile_id).text(response.message).show();
                 });
             });

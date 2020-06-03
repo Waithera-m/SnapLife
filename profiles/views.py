@@ -18,7 +18,8 @@ def index(request):
     profiles = Profile.objects.all()
     images = Image.objects.all()
     comments = Comments.objects.all()
-    return render(request, 'profile_templates/index.html', {'profiles':profiles, 'images':images, 'comments':comments})
+    following = Profile.objects.only('following')
+    return render(request, 'profile_templates/index.html', {'profiles':profiles, 'images':images, 'comments':comments, 'following':following})
 
 @login_required(login_url='/accounts/login/')
 def new_profile(request):
