@@ -17,11 +17,16 @@ To use the application, users need internet access and web browsers, preferably 
 ## Known Bugs
 * The copy button does not work; therefore users have to manually select and copy the image urls
 ## Behavior Driven Development (BDD)
-#### Timeline View
 
+#### Landing View
+![image](https://user-images.githubusercontent.com/60571734/83613158-11271580-a58c-11ea-872f-fb8073b8465b.png)
+
+#### Timeline View
+![image](https://user-images.githubusercontent.com/60571734/83613394-6400cd00-a58c-11ea-925c-99346177ece7.png)
+![image](https://user-images.githubusercontent.com/60571734/83613507-8d215d80-a58c-11ea-8001-a23a863b6e56.png)
 
 #### Profile View
-![image](https://user-images.githubusercontent.com/60571734/83554270-2f056380-a515-11ea-92eb-7dc137a7d22f.png)
+![image](https://user-images.githubusercontent.com/60571734/83613666-c6f26400-a58c-11ea-8de3-a97ae5b8b880.png)
 
 #### User's Posts View
 ![image](https://user-images.githubusercontent.com/60571734/83554455-74c22c00-a515-11ea-91da-91f2a467abca.png)
@@ -51,7 +56,7 @@ You are free to suggest and improve the code. To make your changes:
 * Create a pull request
 * You can also contact the creator via this email address: njihiamary11@gmail.com
 ## Demo
-You can view changes made to the website by visiting this working live demo: 
+You can view changes made to the website by visiting this working live demo: https://snaplife.herokuapp.com/accounts/login/?next=/
 ### License
 *MIT*
 MIT License Copyright (c) 2020 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
