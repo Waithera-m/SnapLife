@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.urls import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.views import generic
+from django.http import JsonResponse
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -134,14 +135,14 @@ def following(request, profile_id):
     view function gets following list
     """
     to_follow = get_object_or_404(Profile, user__profile__id=profile_id)
-    user_profile = request.user
+    user_profile = request.user.profile
     
-    if to_follow.following.filter(id=user.id).exists():
+    if user_profile.following.filter(id=to_follow.user.id).exists():
         message = "You are already following this user"
     else:
-        user_profile.following.add(to_follow)
-        message = "You are now following {{to_follow}}"
-    return redirect(request, 'profiles:index', {'mesage':message})
+        user_profile.following.add(to_follow.user)
+        message = f"You are now following {{to_follow}}"
+    return JsonResponse({"message":message})
 
 
 

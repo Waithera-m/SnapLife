@@ -75,9 +75,9 @@
                         <img src="{{profile.profile_pic.url}}" alt="" class="card-img-top">
                         <div class="card-body">
                             <div class="card-title">{{profile.user.username}}</div>
-                            <div class="message-section" style="display:none;"></div>
+                            <div class="message-section" id="message-{{profile.id}}" style="display:none;"></div>
                             <a href="{% url 'profiles:user_profile' profile.id %}" style="margin-right: 10px;">View Profile</a>
-                            <button data-url="{% url 'profiles:following' profile.user.id %}" class="follow-button" type="button">Follow</button>
+                            <button data-url="{% url 'profiles:following' profile.id %}" class="follow-button" type="button" data_id="{{profile.id}}">Follow</button>
                         </div>
                     </div>
                 {% endfor %}
@@ -91,8 +91,11 @@
         {% endblock %}
         <script>
             $('.follow-button').click(function(){
+                var profile_id = $(this).attr('data_id')
                 $.get($(this).data('url'), function(response){
-                    $('.message-section').text(response.message).show();
+                    console.log(response)
+                    console.log(profile_id)
+                    $('#message-'+profile_id).text(response.message).show();
                 });
             });
         </script>
