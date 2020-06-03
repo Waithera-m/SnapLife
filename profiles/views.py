@@ -43,9 +43,11 @@ def user_profile(request, profile_id):
     """
     view function renders profile page
     """
+    
+    
     try:
         profile = Profile.get_profile_by_id(id=profile_id)
-        print(profile)
+        
     except ObjectDoesNotExist:
         raise Http404()
         raise False

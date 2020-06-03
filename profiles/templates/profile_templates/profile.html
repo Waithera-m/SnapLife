@@ -11,14 +11,14 @@
             </div>
         </div>
     </nav>
-    <div class="container" style="margin-top: 30px;">
+    <div class="container-fluid" style="margin-top: -30px; background-color: #1c2541;">
         <hr>
         <div class="row" style="margin-bottom: 20px;">
             <div class="col-md-4">
-                <i class="fa fa-desktop"></i>
+                <i class="fa fa-desktop" style="color: white;"></i>
             </div>
             <div class="col-md-4">
-                <p><i>@{{user.username}}</i></p>
+                <p style="color: white;"><i>@{{user.username}}</i></p>
             </div>
             <div class="col-md-4">
                 <form class="navbar-form" role="search" action="{% url 'profiles:search_results'%}">
@@ -33,38 +33,36 @@
         <div class="row">
             <div class="col-md-5">
                 <img src="{{profile.profile_pic.url}}" class="rounded" alt="profile image" height="315" width="420">
-                <p>{{profile.user.first_name}}</p>
+                <p style="color: white;">{{profile.user.first_name}}</p>
             </div>
             <div class="col-md-5">
-                <h4><i>@{{user.username}}</i></h4>
-                <p>{{profile.bio}}</p>
+                <h4 style="color: white;"><i>@{{user.username}}</i></h4>
+                <p style="color: white;">{{profile.bio}}</p>
+                {% if request.user == profile.user %}
+                    <a href="{% url 'profiles:index' %}" class="btn btn-primary">View Timeline</a>
+                    <a href="{% url 'profiles:upload' %}" class="btn btn-primary">Upload Image</a>
+                {% endif %}
             </div>
             <div class="col-md-2"></div>
         </div>
         <hr>
         <div class="row">
             <div class="col-md-4">
-                <p><a href="{% url 'profiles:posts' profile.id %}">Posts:</a></p>
+                <p><a href="{% url 'profiles:posts' profile.id %}" style="color:white;">Click to View Posts</a></p>
             </div>
             <div class="col-md-4">
-                <p>Followers: {{profile.followers|length}}</p>
+                <p style="color: white;">Followers: {{profile.followers|length}}</p>
             </div>
             <div class="col-md-4">
-                <p>Following:</p>
+                <p style="color: white;">Following: {{profile.following|length}}</p>
             </div>
         </div>
         <hr>
         <div class="row">
             <div class="col-md-4">
                 <i class="fas fa-camera" style="font-size:120px;color:#2196F3"></i>
-                <p>Share Photos</p>
-                <p>Your shared photos will be appear on your posts page and timeline</p>
-            </div>
-            <div class="col-md-4">
-                <a href="{% url 'profiles:upload' %}" class="btn btn-primary">Upload Image</a>
-            </div>
-            <div class="col-md-4">
-                <a href="{% url 'profiles:index' %}" class="btn btn-primary">View Timeline</a>
+                <p style="color: white;">Share Photos</p>
+                <p style="color: white;">Your shared photos will be appear on your posts page and timeline</p>
             </div>
         </div>
         <div class="row" style="margin-bottom: 50px;">
