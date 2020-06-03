@@ -15,7 +15,7 @@ To use the application, users need internet access and web browsers, preferably 
     ```$ pip install -r requirements.txt```
 * Create file to store sensitive environment variables 
 ## Known Bugs
-* The copy button does not work; therefore users have to manually select and copy the image urls
+* Users can follow themselves
 ## Behavior Driven Development (BDD)
 
 #### Landing View
